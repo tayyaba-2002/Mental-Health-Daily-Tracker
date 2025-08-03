@@ -40,11 +40,98 @@ function renderEntries() {
     });
 }
 
-// Placeholder function to update charts (implement later)
+let moodChartInstance = null;
+let sleepChartInstance = null;
+
 function updateCharts() {
-    // You can use Chart.js or any other library here to visualize mood/sleep data
-    console.log("Chart update placeholder");
+    const entries = JSON.parse(localStorage.getItem("entries")) || [];
+    if (!entries.length) {
+        if (moodChartInstance) {
+            moodChartInstance.destroy();
+            moodChartInstance = null;
+        }
+        if (sleepChartInstance) {
+            sleepChartInstance.destroy();
+            sleepChartInstance = null;
+        }
+        return;
+    }
+
+    const today = new Date();
+    const sevenDaysAgo = new Date(today);
+    sevenDaysAgo.setDate(today.getDate() - 6);
+
+    // Filter entries in last 7 days
+    const recentEntries = entries.filter(entry => {
+        const entryDate = new Date(entry.date);
+        return entryDate >= sevenDaysAgo && entryDate <= today;
+    });
+
+    // Count moods for last 7 days
+    const moodCounts = {};
+    recentEntries.forEach(entry => {
+        moodCounts[entry.mood] = (moodCounts[entry.mood] || 0) + 1;
+    });
+    const moods = Object.keys(moodCounts);
+    const moodValues = moods.map(mood => moodCounts[mood]);
+
+    // Average sleep per day for last 7 days
+    const sleepSums = {};
+    const sleepCounts = {};
+    recentEntries.forEach(entry => {
+        sleepSums[entry.date] = (sleepSums[entry.date] || 0) + entry.sleep;
+        sleepCounts[entry.date] = (sleepCounts[entry.date] || 0) + 1;
+    });
+
+    const sleepDates = Object.keys(sleepSums).sort((a,b) => new Date(a) - new Date(b));
+    const avgSleep = sleepDates.map(date => (sleepSums[date] / sleepCounts[date]).toFixed(2));
+
+    // Destroy old charts if any
+    if (moodChartInstance) moodChartInstance.destroy();
+    if (sleepChartInstance) sleepChartInstance.destroy();
+
+    // Create mood chart (bar)
+    const moodCtx = document.getElementById('moodChart').getContext('2d');
+    moodChartInstance = new Chart(moodCtx, {
+        type: 'bar',
+        data: {
+            labels: moods,
+            datasets: [{
+                label: 'Mood Count (Last 7 Days)',
+                data: moodValues,
+                backgroundColor: ['#4caf50', '#f44336', '#ff9800', '#2196f3', '#9c27b0'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: { beginAtZero: true, stepSize: 1, precision: 0 }
+            }
+        }
+    });
+
+    // Create sleep chart (line)
+    const sleepCtx = document.getElementById('sleepChart').getContext('2d');
+    sleepChartInstance = new Chart(sleepCtx, {
+        type: 'line',
+        data: {
+            labels: sleepDates,
+            datasets: [{
+                label: 'Average Sleep Hours (Last 7 Days)',
+                data: avgSleep,
+                fill: false,
+                borderColor: '#2196f3',
+                tension: 0.1
+            }]
+        },
+        options: {
+            scales: {
+                y: { beginAtZero: true, max: 12 }
+            }
+        }
+    });
 }
+
 
 // Form submission handler to save new entry
 document.getElementById("trackerForm").addEventListener("submit", function (e) {
