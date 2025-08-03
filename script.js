@@ -55,5 +55,3 @@ document.getElementById("trackerForm").addEventListener("submit", function (e) {
     });
 }
 });
-window.onload = function () {
-  renderEntries();
