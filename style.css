@@ -83,3 +83,33 @@ form button:hover {
     max-height: 300px;
     overflow-y: auto;
 }
+.entry {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  line-height: 1.6;
+  transition: transform 0.2s ease;
+}
+
+.entry: hover {
+  transform: scale(1.02);
+}
+
+.entry .date {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.entry .mood {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.entry .journal {
+  font-style: italic;
+  color: #555;
+}
+
