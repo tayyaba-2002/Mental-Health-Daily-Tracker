@@ -1,0 +1,85 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f0f8ff;
+  color: #333;
+}
+
+header {
+  background: #6a9fb5;
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+.subtitle {
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+section {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+}
+
+.form-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+form select,
+form input,
+form textarea,
+form button {
+  padding: 0.8rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+form button {
+  background-color: #6a9fb5;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #558aa2;
+}
+
+.entries-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.entry-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.charts-section canvas {
+  margin-top: 2rem;
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+}
+.charts {
+    margin-top: 40px;
+}
+
+.entry-list {
+    margin-top: 30px;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+}

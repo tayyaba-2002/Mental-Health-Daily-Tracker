@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mental Health Daily Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Mental Health Daily Tracker</h1>
+    <p class="subtitle">Track your mood, sleep, and thoughts daily 💚</p>
+  </header>
+
+  <section class="form-section">
+    <h2>Today's Entry</h2>
+    <form id="trackerForm">
+      <label for="mood">Mood:</label>
+      <select id="mood" required>
+        <option value="">--Select--</option>
+        <option value="Happy">😊 Happy</option>
+        <option value="Sad">😢 Sad</option>
+        <option value="Anxious">😰 Anxious</option>
+        <option value="Excited">😄 Excited</option>
+        <option value="Tired">😴 Tired</option>
+      </select>
+
+      <label for="sleep">Hours Slept:</label>
+      <input type="number" id="sleep" min="0" max="24" required />
+
+      <label for="journal">Journal Entry:</label>
+      <textarea id="journal" rows="4" placeholder="Write your thoughts..."></textarea>
+
+      <button type="submit">Save Entry</button>
+    </form>
+  </section>
+
+  <section class="entries-section">
+    <h2>Recent Entries</h2>
+    <div id="entriesContainer" class="entries-container">
+      <!-- Past entries will appear here -->
+    </div>
+  </section>
+
+  <section class="charts-section">
+    <h2>Weekly Overview</h2>
+    <canvas id="moodChart"></canvas>
+    <canvas id="sleepChart"></canvas>
+
+    <div id="entryList"></div>
+    
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
