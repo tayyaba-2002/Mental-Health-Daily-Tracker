@@ -12,19 +12,37 @@ function renderEntries() {
         "Tired": "😴"
     };
 
-    // Show entries in reverse order (latest first)
-    entries.slice().reverse().forEach((entry, index) => {
-        const div = document.createElement("div");
-        div.className = "entry";
-        div.innerHTML = `
-            <div class="date">${entry.date}</div>
-            <div class="mood">Mood: ${moodEmojis[entry.mood] || entry.mood} (${entry.mood})</div>
-            <div class="sleep">Sleep: ${entry.sleep} hrs</div>
-            <div class="journal">${entry.journal}</div>
-            <button class="delete-btn" data-index="${entries.length - 1 - index}">Delete</button>
-        `;
-        list.appendChild(div);
-    });
+   // Colors for moods
+const moodColors = {
+    "Happy": "#d4edda",     // light green
+    "Sad": "#f8d7da",       // light red
+    "Anxious": "#fff3cd",   // light yellow
+    "Excited": "#cce5ff",   // light blue
+    "Tired": "#e2e3e5"      // light gray
+};
+
+// Show entries in reverse order (latest first) with styled and colored cards
+entries.slice().reverse().forEach((entry, index) => {
+    const div = document.createElement("div");
+    div.className = "entry";
+    div.style.backgroundColor = moodColors[entry.mood] || "#ffffff";  // default white
+    div.style.border = "1px solid #ccc";
+    div.style.padding = "10px";
+    div.style.margin = "8px 0";
+    div.style.borderRadius = "8px";
+    div.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
+
+    div.innerHTML = `
+        <div class="date" style="font-weight:bold; margin-bottom:6px;">${entry.date}</div>
+        <div class="mood" style="font-size: 1.2em;">Mood: ${moodEmojis[entry.mood] || entry.mood} (${entry.mood})</div>
+        <div class="sleep">Sleep: ${entry.sleep} hrs</div>
+        <div class="journal" style="margin-top:6px; white-space: pre-wrap;">${entry.journal}</div>
+        <button class="delete-btn" data-index="${entries.length - 1 - index}" style="margin-top:10px;">Delete</button>
+    `;
+
+    list.appendChild(div);
+});
+
 
     // Add event listeners for delete buttons
     const deleteButtons = document.querySelectorAll(".delete-btn");
