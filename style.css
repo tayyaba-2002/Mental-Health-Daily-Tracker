@@ -112,4 +112,17 @@ form button:hover {
   font-style: italic;
   color: #555;
 }
+.entry button.delete-btn {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.entry button.delete-btn:hover {
+    background-color: #d9363e;
+}
 
