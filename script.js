@@ -22,7 +22,6 @@ document.getElementById("trackerForm").addEventListener("submit", function (e) {
     entries.push(entry);
     localStorage.setItem("entries", JSON.stringify(entries));
 
-    renderEntries();
     updateCharts();
 
     // Clear form fields
@@ -55,5 +54,6 @@ document.getElementById("trackerForm").addEventListener("submit", function (e) {
         list.appendChild(div);
     });
 }
-
+window.onload = function () {
+  renderEntries();
 });
