@@ -193,15 +193,16 @@ document.getElementById("deleteAllBtn").addEventListener("click", function () {
         updateCharts();
     }
 });
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register("service-worker.js")
+      .register("service-worker.js") // ✅ Relative path, NO /
       .then((reg) => console.log("✅ Service Worker registered:", reg.scope))
       .catch((err) => console.log("❌ Service Worker failed:", err));
+  }
   });
-}
-
+    
 // Initialize on page load
 window.onload = function () {
     renderEntries();
