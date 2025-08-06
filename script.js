@@ -194,15 +194,18 @@ document.getElementById("deleteAllBtn").addEventListener("click", function () {
     }
 });
 
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker
-      .register("service-worker.js") // ✅ Relative path, NO /
-      .then((reg) => console.log("✅ Service Worker registered:", reg.scope))
-      .catch((err) => console.log("❌ Service Worker failed:", err));
-  }
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(function (registration) {
+        console.log('ServiceWorker registered: ', registration);
+      })
+      .catch(function (error) {
+        console.log('ServiceWorker registration failed: ', error);
+      });
   });
-    
+}
+
 // Initialize on page load
 window.onload = function () {
     renderEntries();
